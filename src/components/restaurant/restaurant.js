@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
@@ -10,7 +11,7 @@ const Restaurant = ({ restaurant }) => {
 
   const averageRating = useMemo(() => {
     const total = reviews.reduce((acc, { rating }) => acc + rating, 0);
-    return Math.round(total / reviews.length);
+    return Math.round(total / reviews.length) || 0;
   }, [reviews]);
 
   return (
@@ -24,6 +25,14 @@ const Restaurant = ({ restaurant }) => {
       </div>
     </div>
   );
+};
+
+Restaurant.propTypes = {
+  restaurant: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    menu: PropTypes.array.isRequired,
+    reviews: PropTypes.array.isRequired,
+  }).isRequired,
 };
 
 export default Restaurant;

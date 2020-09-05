@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Star from './star';
 
@@ -9,5 +10,9 @@ const Rate = ({ value }) => (
     ))}
   </div>
 );
+
+Rate.propTypes = {
+  value: PropTypes.oneOf([0, 1, 2, 3, 4, 5]),
+};
 
 export default Rate;
