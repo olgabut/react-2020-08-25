@@ -7,11 +7,7 @@ import Basket from '../basket';
 
 class Menu extends React.Component {
   static propTypes = {
-    menu: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }).isRequired
-    ).isRequired,
+    menu: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   };
 
   state = { error: null };

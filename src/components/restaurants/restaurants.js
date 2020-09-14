@@ -18,7 +18,7 @@ const Restaurants = ({ restaurants }) => {
 };
 
 Restaurants.propTypes = {
-  restaurants: PropTypes.arrayOf(
+  restaurants: PropTypes.shape(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
     }).isRequired
