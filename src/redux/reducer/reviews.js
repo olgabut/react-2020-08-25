@@ -11,10 +11,10 @@ export default (reviews = defaultReviews, action) => {
 
   switch (type) {
     case ADDREVIEW:
-      const { reviewID, text, rate, userId } = payload.newReview;
+      const { reviewId, text, rate, userId } = payload.newReview;
       return {
         ...reviews,
-        [reviewID]: { id: reviewID, rating: rate, text: text, userId: userId },
+        [reviewId]: { id: reviewId, rating: rate, text: text, userId: userId },
       };
     default:
       return reviews;
