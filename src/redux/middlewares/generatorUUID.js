@@ -7,7 +7,11 @@ export default (store) => (next) => (action) => {
       action.payload.newReview.reviewId = uuidv4();
     }
     if (!action.payload.newReview.userId) {
-      action.payload.newReview.userId = uuidv4();
+      const user = Object.values(store.getState().users).find(
+        (user) => user.name === action.payload.newReview.name
+      );
+      if (user) action.payload.newReview.userId = user.id;
+      else action.payload.newReview.userId = uuidv4();
     }
     if (!action.payload.newReview.restaurantId) {
       action.payload.newReview.restaurantId =
