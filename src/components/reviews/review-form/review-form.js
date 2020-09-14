@@ -9,8 +9,9 @@ import { addReview } from '../../../redux/actions';
 
 const INITIAL_VALUES = { name: '', text: '', rate: 5 };
 
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = ({ onSubmit, restaurantId }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
+  values.restaurantId = restaurantId;
 
   const handleSubmit = (ev) => {
     ev.preventDefault();

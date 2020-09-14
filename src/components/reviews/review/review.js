@@ -5,7 +5,7 @@ import Rate from '../../rate';
 import styles from './review.module.css';
 import { connect } from 'react-redux';
 
-const Review = ({ user, text, rating }) => (
+const Review = ({ user, text, rating, restaurantId }) => (
   <div className={styles.review} data-id="review">
     <div className={styles.content}>
       <div>
