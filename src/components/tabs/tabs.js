@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
 import styles from './tabs.module.css';
 
-const Tabs = ({ tabs }) => {
+const Tabs = ({ tabs, restaurantId }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const { content } = tabs[activeTab];
@@ -13,13 +14,15 @@ const Tabs = ({ tabs }) => {
     <>
       <div className={styles.tabs}>
         {tabs.map(({ title }, index) => (
-          <span
+          <NavLink
             key={title}
-            className={cn(styles.tab, { [styles.active]: index === activeTab })}
+            to={`/restaurants/${restaurantId}/${title.toLowerCase()}`}
+            className={styles.tab}
+            activeClassName={styles.active}
             onClick={() => setActiveTab(index)}
           >
             {title}
-          </span>
+          </NavLink>
         ))}
       </div>
       {content}

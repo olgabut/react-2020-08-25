@@ -9,7 +9,7 @@ import { restaurantsListSelector } from '../../redux/selectors';
 import styles from './restaurants.module.css';
 
 const Restaurants = ({ restaurants, match, history }) => {
-  const { restId } = match.params;
+  const { restId, activeTab } = match.params;
   const restaurant = restaurants.find((restaurant) => restaurant.id === restId);
 
   return (
@@ -18,7 +18,7 @@ const Restaurants = ({ restaurants, match, history }) => {
         {restaurants.map(({ id, name }, index) => (
           <NavLink
             key={id}
-            to={`/restaurants/${id}`}
+            to={`/restaurants/${id}/${activeTab}`}
             className={styles.tab}
             activeClassName={styles.active}
           >
@@ -26,6 +26,7 @@ const Restaurants = ({ restaurants, match, history }) => {
           </NavLink>
         ))}
       </div>
+
       <Restaurant {...restaurant} />
     </>
   );

@@ -24,7 +24,7 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
       <Banner heading={name}>
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
-      <Tabs tabs={tabs} />
+      <Tabs tabs={tabs} restaurantId={id} />
     </div>
   );
 };

@@ -31,14 +31,16 @@ function RestaurantsPage({
         <h2>select restaurant:</h2>
         {restaurants.map(({ id, name }) => (
           <p key={id}>
-            <Link to={`/restaurants/${id}`}>{name}</Link>
+            <Link to={`/restaurants/${id}/menu`}>{name}</Link>
           </p>
         ))}
       </div>
     );
   }
 
-  return <Route path="/restaurants/:restId" component={Restaurants} />;
+  return (
+    <Route path="/restaurants/:restId/:activeTab" component={Restaurants} />
+  );
 }
 
 export default connect(
