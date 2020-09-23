@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Switch, Redirect, Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
@@ -16,10 +17,17 @@ const Restaurants = ({ restaurants, match, history }) => {
     to: `/restaurants/${id}/menu`,
   }));
 
+  console.log('restId', restId);
+  console.log('restourant', restaurant);
+
   return (
     <>
       <Tabs tabs={tabs} />
-      {restId && <Restaurant {...restaurant} />}
+      <Switch>
+        {restId && restaurant && <Restaurant {...restaurant} />}
+        {restId && <Redirect path={`${match.path}`} to="/error" />}
+        <Redirect exact to={`${match.path}/${restaurants[0].id}`} />
+      </Switch>
     </>
   );
 };

@@ -32,11 +32,7 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
           path="/restaurants/:restId/reviews"
           render={() => <Reviews reviews={reviews} restaurantId={id} />}
         />
-        <Redirect
-          exact
-          from="/restaurants/:restId"
-          to={`/restaurants/${id}/menu`}
-        />
+        <Redirect from="/restaurants/:restId" to={`/restaurants/${id}/menu`} />
       </Switch>
     </div>
   );
