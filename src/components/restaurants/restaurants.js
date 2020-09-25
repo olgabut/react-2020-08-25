@@ -17,9 +17,6 @@ const Restaurants = ({ restaurants, match, history }) => {
     to: `/restaurants/${id}/menu`,
   }));
 
-  console.log('restId', restId);
-  console.log('restourant', restaurant);
-
   return (
     <>
       <Tabs tabs={tabs} />

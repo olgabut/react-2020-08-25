@@ -24,6 +24,7 @@ class Menu extends React.Component {
 
   loadProductsIfNeeded = () => {
     const { loadProducts, restaurantId, loading, loaded } = this.props;
+    console.log('loadProducts', loadProducts);
     if (!loading && !loaded) {
       loadProducts(restaurantId);
     }

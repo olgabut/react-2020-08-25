@@ -6,7 +6,7 @@ const productsSelector = (state) => state.products.entities;
 const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
 
-const orderSelector = (state) => state.order;
+export const orderSelector = (state) => state.order;
 
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
 export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;
@@ -81,4 +81,22 @@ export const totalSelector = createSelector(
   orderProductsSelector,
   (orderProducts) =>
     orderProducts.reduce((acc, { subtotal }) => acc + subtotal, 0)
+);
+
+export const isCheckoutPageSelector = (state) => {
+  return state.router.location.pathname === '/checkout';
+};
+//const sendingOrderSelector = (state) => state.sendingOrder;
+export const orderSendingSelector = (state) => state.sendingOrder.sending;
+export const orderSentSelector = (state) => state.sendingOrder.sent;
+export const responseSentOrderSelector = (state) => state.entities;
+
+export const orderProductsForSendingSelector = createSelector(
+  orderSelector,
+  (order) => {
+    return Object.keys(order).map((productId) => ({
+      id: productId,
+      amount: order[productId],
+    }));
+  }
 );

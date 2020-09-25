@@ -11,3 +11,6 @@ export const LOAD_RESTAURANTS = 'LOAD_RESTAURANTS';
 export const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
 export const LOAD_REVIEWS = 'LOAD_REVIEWS';
 export const LOAD_USERS = 'LOAD_USERS';
+
+export const SEND_ORDER = 'SEND_ORDER';
+export const CLEAR_ORDER = 'CLEAR_ORDER';

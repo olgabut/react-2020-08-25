@@ -9,13 +9,32 @@ import './basket.css';
 import BasketRow from './basket-row';
 import BasketItem from './basket-item';
 import Button from '../button';
-import { orderProductsSelector, totalSelector } from '../../redux/selectors';
+import { sendOrder } from '../../redux/actions';
+import Loader from '../loader';
+
+import {
+  orderProductsSelector,
+  totalSelector,
+  isCheckoutPageSelector,
+  orderSendingSelector,
+  orderSentSelector,
+} from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
+function Basket({
+  title = 'Basket',
+  total,
+  orderProducts,
+  isCheckoutPage,
+  orderSending,
+  orderSent,
+  sendOrder,
+}) {
   // console.log('render Basket');
 
   // const { name } = useContext(userContext);
+
+  if (orderSending) return <Loader />;
 
   if (!total) {
     return (
@@ -51,11 +70,19 @@ function Basket({ title = 'Basket', total, orderProducts }) {
       <BasketRow label="Sub-total" content={`${total} $`} />
       <BasketRow label="Delivery costs:" content="FREE" />
       <BasketRow label="total" content={`${total} $`} bold />
-      <Link to="/checkout">
-        <Button primary block>
-          checkout
+      {isCheckoutPage && (
+        <Button primary block onClick={() => sendOrder()}>
+          send order
         </Button>
-      </Link>
+      )}
+
+      {!isCheckoutPage && (
+        <Link to="/checkout">
+          <Button primary block>
+            checkout
+          </Button>
+        </Link>
+      )}
     </div>
   );
 }
@@ -64,5 +91,9 @@ export default connect(
   createStructuredSelector({
     total: totalSelector,
     orderProducts: orderProductsSelector,
-  })
+    isCheckoutPage: isCheckoutPageSelector,
+    orderSending: orderSendingSelector,
+    orderSent: orderSentSelector,
+  }),
+  { sendOrder }
 )(Basket);

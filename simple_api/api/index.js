@@ -35,28 +35,32 @@ router.get('/users', (req, res, next) => {
 });
 
 router.post('/order', function (req, res, next) {
-  const total = req.body
-    .map(
-      ({ id, amount }) =>
-        products.find((product) => product.id === id).price * amount
-    )
-    .reduce((acc, next) => acc + next, 0);
+  try {
+    const total = req.body
+      .map(
+        ({ id, amount }) =>
+          products.find((product) => product.id === id).price * amount
+      )
+      .reduce((acc, next) => acc + next, 0);
 
-  if (total < 50)
-    return reply(
-      res,
-      `you ordered for $${total}, but the minimum order amount is $50`,
-      3000,
-      400
-    );
-  if (total > 200)
-    return reply(
-      res,
-      `you ordered for $${total}, but the maximum order amount is $200`,
-      3000,
-      400
-    );
-  return reply(res, 'ok', 3000);
+    if (total < 50)
+      return reply(
+        res,
+        `you ordered for $${total}, but the minimum order amount is $50`,
+        3000,
+        400
+      );
+    if (total > 200)
+      return reply(
+        res,
+        `you ordered for $${total}, but the maximum order amount is $200`,
+        3000,
+        400
+      );
+    return reply(res, 'ok', 3000);
+  } catch (error) {
+    return reply(res, error.toString(), 1000, 400);
+  }
 });
 
 module.exports = router;
